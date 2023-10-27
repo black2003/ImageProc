@@ -81,21 +81,21 @@ if upload is not None:
     k = cv2.getStructuringElement(cv2.MORPH_RECT,(xaxs,yaxs))
     st.warning("Define the iterations")
     ite = st.slider("No of Iterations",1,7,1)
-    if st.button("Done"):
-        Morph_meth = st.selectbox(
-            "Select Method:",
-            ("Erosion", "Dilation","Opening","Closing")
-        )
-        if Morph_meth == "Erosion":
-            bkr = cv2.erode(threshInv,k,iterations = ite)
-        elif Morph_meth == "Dilation":
-            bkr = cv2.dilate(threshInv,k,iterations = ite)
-        elif Morph_meth == "Opening":
-            bkr = cv2.morphologyEx(threshInv, cv2.MORPH_OPEN, k,iterations=ite)
-        elif Morph_meth == "Closing":
-            bkr = cv2.morphologyEx(threshInv, cv2.MORPH_CLOSE, k,iterations=ite)
+    
+    Morph_meth = st.selectbox(
+        "Select Method:",
+        ("Erosion", "Dilation","Opening","Closing")
+    )
+    if Morph_meth == "Erosion":
+        bkr = cv2.erode(threshInv,k,iterations = ite)
+    elif Morph_meth == "Dilation":
+        bkr = cv2.dilate(threshInv,k,iterations = ite)
+    elif Morph_meth == "Opening":
+        bkr = cv2.morphologyEx(threshInv, cv2.MORPH_OPEN, k,iterations=ite)
+    elif Morph_meth == "Closing":
+        bkr = cv2.morphologyEx(threshInv, cv2.MORPH_CLOSE, k,iterations=ite)
 
-        showimg(bkr,"gray")
+    showimg(bkr,"gray")
     
     B1 = cv2.morphologyEx(threshInv,cv2.MORPH_OPEN,k,iterations=1)
     
